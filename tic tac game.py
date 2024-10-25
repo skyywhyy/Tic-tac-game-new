@@ -47,6 +47,12 @@ def end_game(winner):
     close_button = tk.Button(endgame_window, text="Закрыть", command=window.quit)
     close_button.pack()
 
+def start_game(player):
+    global current_player, counter
+    current_player = player
+    # counter = 0
+    main_menu.destroy()
+
 
 def draw_symbol(row, col):
     x_center = col * cell_size + cell_size // 2
@@ -75,8 +81,25 @@ def on_cell(event):
         counter += 1
         switch_player()
 
+def choose_player():
+    main_menu.title("Выберите начинающего игрока")
+    label = tk.Label(main_menu, text="Выберите начинающего игрока:")
+    label.pack()
+    btn_x = tk.Button(main_menu, text="Игрок X", command=lambda: start_game("X"))
+    btn_o = tk.Button(main_menu, text="Игрок O", command=lambda: start_game("O")) 
+    btn_x.pack()
+    btn_o.pack()
+    main_menu.mainloop()
+
 
 #окно игры
+main_menu = tk.Tk()
+choose_player()
+winner_label = tk.Label(window, text="", font=("Arial", 18))
+winner_label.pack()
+
+main_menu = tk.Menu(window)
+window.config(menu=main_menu)
 window = tk.Tk()
 window.title("tic-tac-toe")
 
