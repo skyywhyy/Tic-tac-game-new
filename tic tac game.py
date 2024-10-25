@@ -93,6 +93,7 @@ def choose_player():
 
 
 #окно игры
+window = tk.Tk()
 main_menu = tk.Tk()
 choose_player()
 winner_label = tk.Label(window, text="", font=("Arial", 18))
