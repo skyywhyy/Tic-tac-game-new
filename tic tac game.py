@@ -16,16 +16,6 @@ def switch_player():
     else:
         current_player = "X"
 
-def on_cell(event):
-    global counter
-    x, y = event.x, event.y
-    col = x // cell_size
-    row = y // cell_size
-    if game_board[row][col] == " ":
-        game_board[row][col] = current_player
-        draw_symbol(row, col)
-        counter += 1
-        switch_player()
 
 
 #окно игры
