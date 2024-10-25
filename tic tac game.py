@@ -6,6 +6,48 @@ cell_size = 100
 cell_otst = 5
 game_board = [[" " for x in range(3)] for y in range(3)]
 
+def check_winner():
+    winner_found = False
+    for i in range(3):
+        # Проверка горизонтальных линий
+        if game_board[i][0] == game_board[i][1] == game_board[i][2] != " ":
+            winner(game_board[i][0])
+            winner_found = True
+            break
+        # Проверка вертикальных линий
+        if game_board[0][i] == game_board[1][i] == game_board[2][i] != " ":
+            winner(game_board[0][i])
+            winner_found = True
+            break
+    # Проверка диагоналей
+    if game_board[0][0] == game_board[1][1] == game_board[2][2] != " ":
+        winner(game_board[0][0])
+        winner_found = True
+    elif game_board[0][2] == game_board[1][1] == game_board[2][0] != " ":
+        winner(game_board[0][2])
+        winner_found = True
+
+    # Проверка на ничью, если все ячейки заполнены и победителя нет
+    if not winner_found and counter == 9:
+        end_game("Ничья...")
+    
+def winner(player):
+    if player == "X":
+        winner_label.config(text="Игрок X победил!")
+    elif player == "O":
+        winner_label.config(text="Игрок O победил!")
+    end_game(player)
+
+def end_game(winner):
+    board.unbind("<Button-1>")  # Отключаем клики по полю
+    endgame_window = tk.Toplevel(window) 
+    endgame_window.title("Игра окончена")
+    label = tk.Label(endgame_window, text=f"Победитель: {winner}" if winner != "Ничья..." else "Ничья...", font=("Arial", 18))
+    label.pack()
+    close_button = tk.Button(endgame_window, text="Закрыть", command=window.quit)
+    close_button.pack()
+
+
 def draw_symbol(row, col):
     x_center = col * cell_size + cell_size // 2
     y_center = row * cell_size + cell_size // 2
