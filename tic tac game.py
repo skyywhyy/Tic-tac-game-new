@@ -1,5 +1,14 @@
 import tkinter as tk
 
+def draw_symbol(row, col):
+    x_center = col * cell_size + cell_size // 2
+    y_center = row * cell_size + cell_size // 2
+    symbol = game_board[row][col]
+    if symbol == "X":
+        board.create_text(x_center, y_center, text="X", font=("Arial", 24), fill="blue")
+    elif symbol == "O":
+        board.create_text(x_center, y_center, text="O", font=("Arial", 24), fill="red")
+
 #окно игры
 window = tk.Tk()
 window.title("tic-tac-toe")
