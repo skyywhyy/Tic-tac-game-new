@@ -1,5 +1,11 @@
 import tkinter as tk
 
+counter = 0
+current_player = None
+cell_size = 100
+cell_otst = 5
+game_board = [[" " for x in range(3)] for y in range(3)]
+
 def draw_symbol(row, col):
     x_center = col * cell_size + cell_size // 2
     y_center = row * cell_size + cell_size // 2
@@ -16,6 +22,16 @@ def switch_player():
     else:
         current_player = "X"
 
+def on_cell(event):
+    global counter
+    x, y = event.x, event.y
+    col = x // cell_size
+    row = y // cell_size
+    if game_board[row][col] == " ":
+        game_board[row][col] = current_player
+        draw_symbol(row, col)
+        counter += 1
+        switch_player()
 
 
 #окно игры
