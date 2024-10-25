@@ -1,5 +1,12 @@
 import tkinter as tk
 
+def switch_player():
+    global current_player
+    if current_player == "X":
+        current_player = "O"
+    else:
+        current_player = "X"
+
 #окно игры
 window = tk.Tk()
 window.title("tic-tac-toe")
